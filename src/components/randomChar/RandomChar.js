@@ -5,18 +5,30 @@ import "./randomChar.scss";
 import mjolnir from "../../resources/img/mjolnir.png";
 
 class RandomChar extends Component {
+  constructor(props) {
+    super(props);
+    this.updateChar();
+  }
+
   state = {
-    name: null,
-    description: null,
-    thumbnail: null,
-    homepage: null,
-    wiki: null,
+    char: {},
   };
 
   marvelService = new MarvelService();
 
+  onCharLoaded = (char) => {
+    this.setState({ char });
+  };
+
+  updateChar = () => {
+    const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
+    this.marvelService.getCharacter(id).then(this.onCharLoaded);
+  };
+
   render() {
-    const { name, description, thumbnail, homepage, wiki } = this.state;
+    const {
+      char: { name, description, thumbnail, homepage, wiki },
+    } = this.state;
     return (
       <div className="randomchar">
         <div className="randomchar__block">
