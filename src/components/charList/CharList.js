@@ -1,5 +1,6 @@
 import { Component } from "react";
 import Spinner from "../spinner/Spinner";
+import PropTypes from "prop-types";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import MarvelService from "../../services/MarvelService";
 import "./charList.scss";
@@ -56,8 +57,6 @@ class CharList extends Component {
     });
   };
 
-  // Этот метод создан для оптимизации,
-  // чтобы не помещать такую конструкцию в метод render
   renderItems(arr) {
     const items = arr.map((item) => {
       let imgStyle = { objectFit: "cover" };
@@ -79,7 +78,6 @@ class CharList extends Component {
         </li>
       );
     });
-    // А эта конструкция вынесена для центровки спиннера/ошибки
     return <ul className="char__grid">{items}</ul>;
   }
 
@@ -110,5 +108,9 @@ class CharList extends Component {
     );
   }
 }
+
+CharList.propTypes = {
+  onCharSelected: PropTypes.func.isRequired,
+};
 
 export default CharList;
