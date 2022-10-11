@@ -7,7 +7,7 @@ const SingleCharacterLayout = ({ data }) => {
   return (
     <div className="single-comic">
       <Helmet>
-        <meta charSet="utf-8" />
+        <meta name="description" content={`${name} page`} />
         <title>{name}</title>
       </Helmet>
       <img src={thumbnail} alt={name} className="single-comic__char-img" />

@@ -1,10 +1,10 @@
 import { useHttp } from "../hooks/http.hook";
 
 const useMarvelService = () => {
-  const { loading, request, error, clearError } = useHttp();
+  const { request, clearError, process, setProcess } = useHttp();
 
   const _apiBase = "https://gateway.marvel.com:443/v1/public/";
-  const _apiKey = "apikey=c5d6fc8b83116d92ed468ce36bac6c62";
+  const _apiKey = "apikey=3952403678e74cc28dd73c24022253e8";
   const _baseOffset = 210;
 
   const getAllCharacters = async (offset = _baseOffset) => {
@@ -60,14 +60,16 @@ const useMarvelService = () => {
         : "No information about the number of pages",
       thumbnail: comics.thumbnail.path + "." + comics.thumbnail.extension,
       language: comics.textObjects.language || "en-us",
-      price: comics.prices.price ? `${comics.prices.price}$` : "not available",
+      price: comics.prices[0].price
+        ? `${comics.prices[0].price}$`
+        : "not available",
     };
   };
 
   return {
-    loading,
-    error,
     clearError,
+    process,
+    setProcess,
     getAllCharacters,
     getCharacterByName,
     getCharacter,
